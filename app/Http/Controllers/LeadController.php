@@ -7,15 +7,16 @@ use App\Models\Lead;
 
 class LeadController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $leads = Lead::all();
+
         return view('leads.index', compact('leads'));
     }
 
     public function create()
     {
-        return view('leads.create');
+        return response()->json(['message' => 'Método não suportado.'], 405);
     }
 
     public function store(Request $request)
@@ -27,14 +28,12 @@ class LeadController extends Controller
 
         Lead::create($request->all());
 
-        return redirect()->route('leads.index')
-            ->with('success', 'Lead criado com sucesso.');
+        return response()->json(['message' => 'Lead criado com sucesso.'], 201);
     }
 
     public function edit($id)
     {
-        $lead = Lead::findOrFail($id);
-        return view('leads.edit', compact('lead'));
+        return response()->json(['message' => 'Método não suportado.'], 405);
     }
 
     public function update(Request $request, $id)
@@ -44,25 +43,42 @@ class LeadController extends Controller
             'email' => 'required|email|unique:leads,email,' . $id,
         ]);
 
-        $lead = Lead::findOrFail($id);
+        $lead = Lead::find($id);
+        if (!$lead) {
+            return response()->json(['message' => 'Lead não encontrado.'], 404);
+        }
+
         $lead->update($request->all());
 
-        return redirect()->route('leads.index')
-            ->with('success', 'Lead atualizado com sucesso.');
+        return response()->json(['message' => 'Lead atualizado com sucesso.'], 200);
     }
 
     public function show($id)
     {
-        $lead = Lead::findOrFail($id);
-        return view('leads.show', compact('lead'));
+        $lead = Lead::find($id);
+        if (!$lead) {
+            return response()->json(['message' => 'Lead não encontrado.'], 404);
+        }
+
+        return response()->json(['lead' => $lead], 200);
     }
 
     public function destroy($id)
     {
-        $lead = Lead::findOrFail($id);
+        $lead = Lead::find($id);
+        if (!$lead) {
+            return response()->json(['message' => 'Lead não encontrado.'], 404);
+        }
+
         $lead->delete();
 
-        return redirect()->route('leads.index')
-            ->with('success', 'Lead excluído com sucesso.');
+        return response()->json(['message' => 'Lead excluído com sucesso.'], 200);
+    }
+
+    public function list(Request $request)
+    {
+        $leads = Lead::all();
+
+        return response()->json(['leads' => $leads], 200);
     }
 }
