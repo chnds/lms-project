@@ -7,78 +7,85 @@ use App\Models\Lead;
 
 class LeadController extends Controller
 {
-    public function index(Request $request)
+    protected $request;
+
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
+    }
+
+    public function index()
     {
         $leads = Lead::all();
-
         return view('leads.index', compact('leads'));
     }
 
     public function create()
     {
-        return response()->json(['message' => 'Método não suportado.'], 405);
+        return view('leads.create');
     }
 
-    public function store(Request $request)
+    public function store()
     {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email|unique:leads',
-        ]);
+        $this->validateLead();
 
-        Lead::create($request->all());
+        $lead = Lead::create($this->request->all());
 
-        return response()->json(['message' => 'Lead criado com sucesso.'], 201);
+        return $this->respond('Lead criado com sucesso.', $lead);
     }
 
     public function edit($id)
     {
-        return response()->json(['message' => 'Método não suportado.'], 405);
+        $lead = Lead::findOrFail($id);
+        return view('leads.edit', compact('lead'));
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        $request->validate([
-            'nome' => 'required',
-            'email' => 'required|email|unique:leads,email,' . $id,
-        ]);
+        $this->validateLead($id);
 
-        $lead = Lead::find($id);
-        if (!$lead) {
-            return response()->json(['message' => 'Lead não encontrado.'], 404);
-        }
+        $lead = Lead::findOrFail($id);
+        $lead->update($this->request->all());
 
-        $lead->update($request->all());
-
-        return response()->json(['message' => 'Lead atualizado com sucesso.'], 200);
+        return $this->respond('Lead atualizado com sucesso.', $lead);
     }
 
     public function show($id)
     {
-        $lead = Lead::find($id);
-        if (!$lead) {
-            return response()->json(['message' => 'Lead não encontrado.'], 404);
-        }
-
+        $lead = Lead::findOrFail($id);
         return response()->json(['lead' => $lead], 200);
     }
 
     public function destroy($id)
     {
-        $lead = Lead::find($id);
-        if (!$lead) {
-            return response()->json(['message' => 'Lead não encontrado.'], 404);
-        }
-
+        $lead = Lead::findOrFail($id);
         $lead->delete();
 
-        return response()->json(['message' => 'Lead excluído com sucesso.'], 200);
+        return $this->respond('Lead deletado com sucesso.', $lead);
     }
 
-    public function list(Request $request)
+    public function list()
     {
         $leads = Lead::all();
-
         return response()->json(['leads' => $leads], 200);
+    }
+
+    protected function validateLead($id = null)
+    {
+        $rules = [
+            'nome' => 'required',
+            'email' => 'required|email|unique:leads,email,' . $id,
+        ];
+
+        return $this->validate($this->request, $rules);
+    }
+
+    protected function respond($message, $lead)
+    {
+        if ($this->request->expectsJson()) {
+            return response()->json(['message' => $message, 'lead' => $lead], 200);
+        } else {
+            return redirect()->back()->with('success', $message);
+        }
     }
 }

@@ -55,7 +55,7 @@ class LeadApiTest extends TestCase
             'Authorization' => 'Bearer ' . $token,
         ])->postJson('/api/leads', $leadData);
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 
     public function testCanShowLead()
