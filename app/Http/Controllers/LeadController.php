@@ -14,9 +14,19 @@ class LeadController extends Controller
         $this->request = $request;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $leads = Lead::all();
+        $query = $request->input('query');
+        $leads = Lead::query()
+                     ->where('nome', 'LIKE', "%{$query}%")
+                     ->orWhere('email', 'LIKE', "%{$query}%")
+                     ->orWhere('telefone', 'LIKE', "%{$query}%")
+                     ->orWhere('empresa', 'LIKE', "%{$query}%")
+                     ->orderBy('nome', 'asc')
+                     ->paginate(10);
+    
+        return view('leads.index', compact('leads'));
+
         return view('leads.index', compact('leads'));
     }
 
@@ -53,7 +63,7 @@ class LeadController extends Controller
     public function show($id)
     {
         $lead = Lead::findOrFail($id);
-        return response()->json(['lead' => $lead], 200);
+        return $this->respond('Lead encontrado com sucesso!', $lead);
     }
 
     public function destroy($id)
@@ -85,7 +95,7 @@ class LeadController extends Controller
         if ($this->request->expectsJson()) {
             return response()->json(['message' => $message, 'lead' => $lead], 200);
         } else {
-            return redirect()->back()->with('success', $message);
+            return redirect()->route('leads.index')->with('success', $message);
         }
     }
 }

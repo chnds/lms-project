@@ -1,19 +1,26 @@
+function confirmDelete() {
+    if (confirm('Tem certeza de que deseja excluir este item?')) {
+        document.getElementById('deleteForm').submit();
+    }
+}
+
 $(document).ready(function() {
-    $('.editLeadButton').click(function(e) {
-        e.preventDefault(); 
-        var leadId = $(this).attr('lead-id');
+    $('.show-lead-btn').click(function() {
+        var leadId = $(this).data('lead-id');
+
         $.ajax({
             url: '/leads/' + leadId,
             type: 'GET',
             success: function(response) {
-                $('#editLeadModal input[name="nome"]').val(response.lead.nome);
-                $('#editLeadModal input[name="email"]').val(response.lead.email);
-                $('#editLeadModal input[name="telefone"]').val(response.lead.telefone);
-                $('#editLeadModal input[name="empresa"]').val(response.lead.empresa);
-                $('#editLeadModal input[name="cargo"]').val(response.lead.cargo);
-                $('#editLeadModal textarea[name="interesses"]').val(response.lead.interesses);
-                $('#editLeadModal input[name="fonte"]').val(response.lead.fonte);
-                $('#editLeadModal input[name="status"]').val(response.lead.status);
+                $('#show_nome').val(response.lead.nome);
+                $('#show_email').val(response.lead.email);
+                $('#show_telefone').val(response.lead.telefone);
+                $('#show_empresa').val(response.lead.empresa);
+                $('#show_cargo').val(response.lead.cargo);
+                $('#show_interesses').val(response.lead.interesses);
+                $('#show_fonte').val(response.lead.fonte);
+                $('#show_status').val(response.lead.status).prop('selected', true).prop('disabled', true);
+                
             },
             error: function(xhr, status, error) {
                 console.error(error);

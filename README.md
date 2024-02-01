@@ -40,6 +40,7 @@ Instalação das Dependências:
 
 Abra um terminal na raiz do projeto e execute o comando composer install para instalar as dependências do PHP.
 Em seguida, execute npm install && npm run dev para instalar as dependências do Node.js e compilar os ativos front-end.
+
 Execução das Migrações e Seeders:
 
 No terminal, execute php artisan migrate --seed para executar as migrações do banco de dados e popular o banco com dados de exemplo.
@@ -74,8 +75,8 @@ Obs: Este é um usuario cadastrado e pode ser utilizado após executar as migrat
 
 body{
     {
-        "email": "example@example.com",
-        "password": "12345678"
+        "email": "test@example.com",
+        "password": "password"
     }
 
 }
