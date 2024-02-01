@@ -81,6 +81,14 @@ body{
 
 }
 
+### Cabeçalhos Requeridos
+
+Para interagir com a API, os seguintes cabeçalhos devem ser incluídos em todas as solicitações:
+
+- `Content-Type`: Deve ser definido como `application/json` para indicar que o corpo da solicitação está no formato JSON.
+- `Accept`: Deve ser definido como `application/json` para indicar que o cliente aceita uma resposta no formato JSON.
+
+
 ##Exemplos de Uso
 
 Aqui estão alguns exemplos de uso das principais funcionalidades do sistema:
