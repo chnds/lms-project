@@ -1,4 +1,4 @@
-##Sistema de Gerenciamento de Leads
+## Sistema de Gerenciamento de Leads
 
 Este é um sistema desenvolvido em Laravel 10 para gerenciamento de leads. Ele inclui um banco de dados, seeders para popular o banco de dados com dados de exemplo, testes unitários para a API/sistema web, métodos de autenticação nativos do Breeze, e tokens de autenticação para requisições da API.
 
@@ -15,7 +15,7 @@ Copie o arquivo de configuração .env.example para .env e configure as variáve
 cp .env.example .env
 Gere uma chave de aplicativo:
 
-##Configuração do Banco de Dados e Ambiente Local
+## Configuração do Banco de Dados e Ambiente Local
 
 Preparação do Ambiente Local:
 
@@ -89,7 +89,7 @@ Para interagir com a API, os seguintes cabeçalhos devem ser incluídos em todas
 - `Accept`: Deve ser definido como `application/json` para indicar que o cliente aceita uma resposta no formato JSON.
 
 
-##Exemplos de Uso
+## Exemplos de Uso
 
 Aqui estão alguns exemplos de uso das principais funcionalidades do sistema:
 
@@ -105,7 +105,7 @@ Aqui estão alguns exemplos de uso das principais funcionalidades do sistema:
 
 
 
-##Testes Unitários
+## Testes Unitários
 Este sistema inclui testes unitários para garantir a integridade e o funcionamento adequado das diferentes partes do aplicativo. Os testes estão localizados no diretório tests/Unit e podem ser executados usando o seguinte comando:
 
 1. Certifique-se de estar na raiz do projeto no terminal.
@@ -116,7 +116,7 @@ Este sistema inclui testes unitários para garantir a integridade e o funcioname
 **php artisan test**
 
 
-##Documentação de Arquitetura e Decisões de Design
+## Documentação de Arquitetura e Decisões de Design
 
 Arquitetura e Tecnologias Utilizadas:
 
