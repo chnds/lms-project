@@ -15,6 +15,38 @@ Copie o arquivo de configuração .env.example para .env e configure as variáve
 cp .env.example .env
 Gere uma chave de aplicativo:
 
+##Configuração do Banco de Dados e Ambiente Local
+
+Preparação do Ambiente Local:
+
+Certifique-se de ter um ambiente de desenvolvimento local configurado. Recomenda-se o uso de um servidor web local, como o XAMPP, WAMP ou Laravel Valet, para executar o aplicativo Laravel.
+Instale o PHP, Composer e Node.js em seu sistema, conforme necessário.
+Clone o repositório do GitHub para o seu ambiente local.
+Configuração do Banco de Dados:
+
+Abra o arquivo .env.example no diretório raiz do projeto e renomeie-o para .env.
+
+No arquivo .env, configure as variáveis de ambiente relacionadas ao banco de dados, como DB_CONNECTION, DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME e DB_PASSWORD, de acordo com as configurações do seu ambiente local. Por exemplo:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nome_do_banco_de_dados
+DB_USERNAME=seu_usuario
+DB_PASSWORD=sua_senha
+Certifique-se de criar um banco de dados vazio com o nome especificado em DB_DATABASE no seu servidor MySQL local.
+
+Instalação das Dependências:
+
+Abra um terminal na raiz do projeto e execute o comando composer install para instalar as dependências do PHP.
+Em seguida, execute npm install && npm run dev para instalar as dependências do Node.js e compilar os ativos front-end.
+Execução das Migrações e Seeders:
+
+No terminal, execute php artisan migrate --seed para executar as migrações do banco de dados e popular o banco com dados de exemplo.
+Servir a Aplicação:
+
+Por fim, inicie o servidor local executando php artisan serve. A aplicação Laravel estará disponível em http://localhost:8000 no seu navegador web.
+
 php artisan key:generate
 Execute as migrações do banco de dados e os seeders para popular o banco de dados com dados de exemplo:
 
