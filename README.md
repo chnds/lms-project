@@ -24,7 +24,7 @@ Instale as dependências do NPM e compile os ativos:
 
 **npm install && npm run dev**
 
-Métodos de Autenticação
+##Métodos de Autenticação
 Este sistema utiliza os métodos de autenticação nativos do Breeze, que oferecem autenticação via sessões para aplicativos web e tokens de autenticação para APIs.
 
 Autenticação para Aplicativos Web
@@ -64,7 +64,7 @@ Aqui estão alguns exemplos de uso das principais funcionalidades do sistema:
 
 
 
-Testes Unitários
+##Testes Unitários
 Este sistema inclui testes unitários para garantir a integridade e o funcionamento adequado das diferentes partes do aplicativo. Os testes estão localizados no diretório tests/Unit e podem ser executados usando o seguinte comando:
 
 1. Certifique-se de estar na raiz do projeto no terminal.
@@ -83,13 +83,12 @@ Laravel 10: Framework PHP MVC utilizado para desenvolver o sistema de gerenciame
 MySQL: Banco de dados relacional para armazenamento dos dados dos leads.
 Bootstrap: Framework front-end para criar interfaces responsivas e visualmente atraentes.
 jQuery e AJAX: Utilizados para simplificar a manipulação do DOM e permitir requisições assíncronas no lado do cliente.
-
 Decisões de Design:
 
 Padrão MVC: Separou as responsabilidades de modelagem, visualização e controle no desenvolvimento do sistema.
 Validação de Dados: Realizada tanto no lado do servidor quanto no cliente para garantir uma experiência de usuário fluida.
 Seeders: Criados para popular o banco de dados com dados de exemplo, facilitando o desenvolvimento e teste do sistema.
 Testes Automatizados: Escritos com PHPUnit para garantir a correção e robustez das diferentes partes do aplicativo.
-
 Segurança e Autenticação:
+
 Sanctum: Utilizado para autenticação baseada em tokens, garantindo a segurança dos dados dos leads e do sistema como um todo.
